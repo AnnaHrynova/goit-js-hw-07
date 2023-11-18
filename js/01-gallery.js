@@ -31,7 +31,7 @@ function handleKeyPress(evt) {
 };
 
 function createMarkup(arr) {
-    gallery.innerHTML = '';
+    
     return arr.map(({ preview, original, description }) => `
 
     <li class="gallery__item">
