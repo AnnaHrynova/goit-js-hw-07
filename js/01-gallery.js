@@ -25,10 +25,11 @@ function handleClick(event) {
 
 function handleKeyPress(evt) {
   if (evt.code === "Escape") {
-    instance.close();
-    document.removeEventListener("keydown", handleKeyPress);
+    closeModal();
   }
 };
+
+document.removeEventListener("keydown", handleKeyPress);
 
 function createMarkup(arr) {
     
