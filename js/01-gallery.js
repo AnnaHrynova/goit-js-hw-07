@@ -15,21 +15,27 @@ function handleClick(event) {
     const currentItem = event.target.closest(".gallery__item");
     const original = currentItem.querySelector(".gallery__image").dataset.source;
     const instance = basicLightbox.create(`
-        <div class="modal">
             <img src="${original}">
-        </div>
-    `);
+    `, {
+	/*
+	 * Function that gets executed before the lightbox will be shown.
+	 * Returning false will prevent the lightbox from showing.
+	 */
+	onShow: (instance) => {document.addEventListener("keydown", handleKeyPress);},
+	/*
+	 * Function that gets executed before the lightbox closes.
+	 * Returning false will prevent the lightbox from closing.
+	 */
+	onClose: (instance) => {document.removeEventListener("keydown", handleKeyPress);}
+});
     instance.show();
-    document.addEventListener("keydown", handleKeyPress);
+    
+    function handleKeyPress(evt) {
+        if (evt.code === "Escape") {
+            instance.close();
+        }
+    };
 };
-
-function handleKeyPress(evt) {
-  if (evt.code === "Escape") {
-    closeModal();
-  }
-};
-
-document.removeEventListener("keydown", handleKeyPress);
 
 function createMarkup(arr) {
     
